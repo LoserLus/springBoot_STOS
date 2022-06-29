@@ -11,7 +11,7 @@
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 28/06/2022 21:19:46
+ Date: 29/06/2022 10:11:46
 */
 
 SET NAMES utf8mb4;
@@ -58,13 +58,13 @@ CREATE TABLE `dglist`  (
   INDEX `Author_dg`(`Author`) USING BTREE,
   INDEX `publish_dg`(`Publish`) USING BTREE,
   INDEX `price_dg`(`Price`) USING BTREE,
+  CONSTRAINT `Author_dg` FOREIGN KEY (`Author`) REFERENCES `textmessage` (`author`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `DSZname_user` FOREIGN KEY (`DGZname`) REFERENCES `user` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `DSZnumber_user` FOREIGN KEY (`DGZnumber`) REFERENCES `user` (`number`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `Tel_user` FOREIGN KEY (`Tel`) REFERENCES `user` (`tel`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ISBN_dg` FOREIGN KEY (`ISBN`) REFERENCES `textmessage` (`ISBN`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `Author_dg` FOREIGN KEY (`Author`) REFERENCES `textmessage` (`author`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `price_dg` FOREIGN KEY (`Price`) REFERENCES `textmessage` (`price`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `publish_dg` FOREIGN KEY (`Publish`) REFERENCES `textmessage` (`publish`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `publish_dg` FOREIGN KEY (`Publish`) REFERENCES `textmessage` (`publish`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Tel_user` FOREIGN KEY (`Tel`) REFERENCES `user` (`tel`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订购单二维结构描述了订购单表格的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -118,12 +118,26 @@ CREATE TABLE `jslist`  (
   PRIMARY KEY (`JSnumber`) USING BTREE,
   INDEX `ISBN_jslist`(`ISBN`) USING BTREE,
   INDEX `CGname_cg`(`CGname`) USING BTREE,
-  CONSTRAINT `ISBN_jslist` FOREIGN KEY (`ISBN`) REFERENCES `textmessage` (`ISBN`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `CGname_cg` FOREIGN KEY (`CGname`) REFERENCES `cgmessagerr` (`CGname`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `CGname_cg` FOREIGN KEY (`CGname`) REFERENCES `cgmessagerr` (`CGname`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `ISBN_jslist` FOREIGN KEY (`ISBN`) REFERENCES `textmessage` (`ISBN`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '进书单二维结构描述了进书单表格的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of jslist
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for login
+-- ----------------------------
+DROP TABLE IF EXISTS `login`;
+CREATE TABLE `login`  (
+  `Username` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户名',
+  `Password` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
+  `Permission` int(0) NOT NULL COMMENT '权限1：一般用户（学生、教师）权限2：采购人员；权限3：教材发行人员；'
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '前台用户登录数据' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of login
 -- ----------------------------
 
 -- ----------------------------
@@ -141,8 +155,8 @@ CREATE TABLE `lslist`  (
   INDEX `DGZnumber_ls`(`DGZnumber`) USING BTREE,
   INDEX `DGnumber_ls`(`DGnumber`) USING BTREE,
   INDEX `LSname_ls`(`LSname`) USING BTREE,
-  CONSTRAINT `DGZnumber_ls` FOREIGN KEY (`DGZnumber`) REFERENCES `dglist` (`DGZnumber`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `DGnumber_ls` FOREIGN KEY (`DGnumber`) REFERENCES `dglist` (`DGnumber`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `DGZnumber_ls` FOREIGN KEY (`DGZnumber`) REFERENCES `dglist` (`DGZnumber`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `LSname_ls` FOREIGN KEY (`LSname`) REFERENCES `fxmessager` (`fxname`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '领书单二维结构描述了领书单表格的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
 
