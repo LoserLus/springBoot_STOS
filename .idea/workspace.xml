@@ -46,13 +46,14 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "F:/IDEA_Produt/springBoot_STOS/src/main/resources",
+    "last_opened_file_path": "F:/IDEA_Produt/springBoot_STOS/pom.xml",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.runner"
+    "settings.editor.selected.configurable": "reference.settings.project.maven.runner",
+    "spring.configuration.checksum": "67de5f4bb10bda66d34c70c9f0ecca5b"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -89,6 +90,7 @@
       <option name="presentableId" value="Default" />
       <updated>1656419750695</updated>
       <workItem from="1656419751965" duration="1795000" />
+      <workItem from="1656480889435" duration="404000" />
     </task>
     <servers />
   </component>
