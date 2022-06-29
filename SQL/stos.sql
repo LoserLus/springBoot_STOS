@@ -11,7 +11,7 @@
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 29/06/2022 10:11:46
+ Date: 29/06/2022 10:14:33
 */
 
 SET NAMES utf8mb4;
@@ -133,7 +133,8 @@ DROP TABLE IF EXISTS `login`;
 CREATE TABLE `login`  (
   `Username` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户名',
   `Password` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
-  `Permission` int(0) NOT NULL COMMENT '权限1：一般用户（学生、教师）权限2：采购人员；权限3：教材发行人员；'
+  `Permission` int(0) NOT NULL COMMENT '权限1：一般用户（学生、教师）权限2：采购人员；权限3：教材发行人员；',
+  PRIMARY KEY (`Username`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '前台用户登录数据' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
