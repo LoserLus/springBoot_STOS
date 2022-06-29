@@ -11,7 +11,7 @@
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 29/06/2022 10:14:33
+ Date: 29/06/2022 14:27:50
 */
 
 SET NAMES utf8mb4;
@@ -25,6 +25,8 @@ CREATE TABLE `cgmessagerr`  (
   `CGnumber` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '职工号',
   `CGname` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '职工名字',
   `CGtel` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系方式',
+  `CGUser` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '账号',
+  `CGPassword` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
   PRIMARY KEY (`CGnumber`) USING BTREE,
   INDEX `CGname`(`CGname`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '教材采购人员二维结构描述教材采购人员表的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
@@ -42,7 +44,7 @@ CREATE TABLE `dglist`  (
   `DGZname` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订购者姓名',
   `DGZnumber` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订购者编号',
   `Tel` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系电话',
-  `ISBN` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '书籍名称',
+  `ISBN` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '书号',
   `Author` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '作者',
   `Publish` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '出版社',
   `Price` int(0) NULL DEFAULT NULL COMMENT '价格',
@@ -59,12 +61,12 @@ CREATE TABLE `dglist`  (
   INDEX `publish_dg`(`Publish`) USING BTREE,
   INDEX `price_dg`(`Price`) USING BTREE,
   CONSTRAINT `Author_dg` FOREIGN KEY (`Author`) REFERENCES `textmessage` (`author`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `DSZname_user` FOREIGN KEY (`DGZname`) REFERENCES `user` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `DSZnumber_user` FOREIGN KEY (`DGZnumber`) REFERENCES `user` (`number`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `DSZname_user` FOREIGN KEY (`DGZname`) REFERENCES `nmuser` (`NMname`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `DSZnumber_user` FOREIGN KEY (`DGZnumber`) REFERENCES `nmuser` (`NMnumber`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ISBN_dg` FOREIGN KEY (`ISBN`) REFERENCES `textmessage` (`ISBN`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `price_dg` FOREIGN KEY (`Price`) REFERENCES `textmessage` (`price`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `publish_dg` FOREIGN KEY (`Publish`) REFERENCES `textmessage` (`publish`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `Tel_user` FOREIGN KEY (`Tel`) REFERENCES `user` (`tel`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `Tel_user` FOREIGN KEY (`Tel`) REFERENCES `nmuser` (`NMtel`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订购单二维结构描述了订购单表格的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -76,11 +78,13 @@ CREATE TABLE `dglist`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `fxmessager`;
 CREATE TABLE `fxmessager`  (
-  `fxnumber` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '职工号',
-  `fxname` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '职工名字',
-  `fxtel` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系方式',
-  PRIMARY KEY (`fxnumber`) USING BTREE,
-  INDEX `fxname`(`fxname`) USING BTREE
+  `FXnumber` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '职工号',
+  `FXname` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '职工名字',
+  `FXtel` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系方式',
+  `FXUser` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '账号',
+  `FXPassword` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
+  PRIMARY KEY (`FXnumber`) USING BTREE,
+  INDEX `fxname`(`FXname`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '教材发行人员二维结构描述教材发行人员表格的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -127,21 +131,6 @@ CREATE TABLE `jslist`  (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for login
--- ----------------------------
-DROP TABLE IF EXISTS `login`;
-CREATE TABLE `login`  (
-  `Username` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户名',
-  `Password` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
-  `Permission` int(0) NOT NULL COMMENT '权限1：一般用户（学生、教师）权限2：采购人员；权限3：教材发行人员；',
-  PRIMARY KEY (`Username`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '前台用户登录数据' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of login
--- ----------------------------
-
--- ----------------------------
 -- Table structure for lslist
 -- ----------------------------
 DROP TABLE IF EXISTS `lslist`;
@@ -158,11 +147,31 @@ CREATE TABLE `lslist`  (
   INDEX `LSname_ls`(`LSname`) USING BTREE,
   CONSTRAINT `DGnumber_ls` FOREIGN KEY (`DGnumber`) REFERENCES `dglist` (`DGnumber`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `DGZnumber_ls` FOREIGN KEY (`DGZnumber`) REFERENCES `dglist` (`DGZnumber`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `LSname_ls` FOREIGN KEY (`LSname`) REFERENCES `fxmessager` (`fxname`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `LSname_ls` FOREIGN KEY (`LSname`) REFERENCES `fxmessager` (`FXname`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '领书单二维结构描述了领书单表格的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lslist
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for nmuser
+-- ----------------------------
+DROP TABLE IF EXISTS `nmuser`;
+CREATE TABLE `nmuser`  (
+  `NMnumber` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '编号',
+  `NMname` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '姓名',
+  `NMclass` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所属院系',
+  `NMtel` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系方式',
+  `NMUser` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '账号',
+  `NMPassword` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
+  PRIMARY KEY (`NMnumber`) USING BTREE,
+  INDEX `name`(`NMname`) USING BTREE,
+  INDEX `tel`(`NMtel`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '普通用户（学生、老师）信息二维结构描述了学生信息表格的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of nmuser
 -- ----------------------------
 
 -- ----------------------------
@@ -201,24 +210,6 @@ CREATE TABLE `textmessage`  (
 
 -- ----------------------------
 -- Records of textmessage
--- ----------------------------
-
--- ----------------------------
--- Table structure for user
--- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`  (
-  `number` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '编号',
-  `name` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '姓名',
-  `class` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所属院系',
-  `tel` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系方式',
-  PRIMARY KEY (`number`) USING BTREE,
-  INDEX `name`(`name`) USING BTREE,
-  INDEX `tel`(`tel`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '学生、老师信息二维结构描述了学生信息表格的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of user
 -- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
