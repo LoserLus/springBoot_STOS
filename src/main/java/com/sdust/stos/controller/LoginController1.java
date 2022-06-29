@@ -17,7 +17,7 @@ public class LoginController1 {
         log.info("username: {}",username);
         log.info("pwd: {}",pwd);
 
-        return null;
+        return "Hello world";
     }
 
 
