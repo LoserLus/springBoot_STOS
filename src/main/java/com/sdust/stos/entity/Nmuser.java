@@ -6,21 +6,21 @@ import lombok.Data;
 public class Nmuser {
 
     //编号
-    private String DGZnumber;
+    private String dgzNumber;
 
     //姓名
-    private String DGZname;
+    private String dgzName;
 
     //所属院系
-    private String DGZclass;
+    private String dgzClass;
 
     //联系方式
-    private String NMtel;
+    private String nmTel;
 
     //账号
-    private String NMUser;
+    private String nmUser;
 
     //密码
-    private String NMPassword;
+    private String nmPassword;
 
 }

@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="24b1d94d-0dda-4065-a6d8-eea2de563ef7" name="Changes" comment="" />
+    <list default="true" id="24b1d94d-0dda-4065-a6d8-eea2de563ef7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/vue/STOS-VUE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sdust/stos/controller/LoginController1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sdust/stos/controller/LoginController1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sdust/stos/entity/Nmuser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sdust/stos/entity/Nmuser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sdust/stos/controller/LoginController1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sdust/stos/controller/LoginController1.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,28 +43,36 @@
     <option name="jreName" value="1.8" />
   </component>
   <component name="ProjectId" id="2BCp76YUfJlVs1TmMFiB5Av9duW" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "F:/IDEA_Produt/springBoot_STOS/pom.xml",
+    "last_opened_file_path": "F:/IDEA_Produt/springBoot_STOS/src/main/java/com/sdust/stos/common",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "reference.settings.project.maven.runner",
-    "spring.configuration.checksum": "67de5f4bb10bda66d34c70c9f0ecca5b"
+    "spring.configuration.checksum": "67de5f4bb10bda66d34c70c9f0ecca5b",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\IDEA_Produt\springBoot_STOS\src\main\java\com\sdust\stos\common" />
       <recent name="F:\IDEA_Produt\springBoot_STOS\src\main\resources" />
     </key>
   </component>
@@ -90,11 +105,38 @@
       <option name="presentableId" value="Default" />
       <updated>1656419750695</updated>
       <workItem from="1656419751965" duration="1795000" />
-      <workItem from="1656480889435" duration="404000" />
+      <workItem from="1656480889435" duration="1005000" />
+      <workItem from="1656500493187" duration="830000" />
+      <workItem from="1656502353044" duration="376000" />
+      <workItem from="1656502747816" duration="298000" />
+      <workItem from="1656503390673" duration="4964000" />
+      <workItem from="1656556036522" duration="1508000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sdust/stos/controller/LoginController1.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
