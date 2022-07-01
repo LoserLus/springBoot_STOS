@@ -6,17 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="24b1d94d-0dda-4065-a6d8-eea2de563ef7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sdust/stos/controller/LoginController1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sdust/stos/controller/LoginController1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sdust/stos/entity/Nmuser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sdust/stos/entity/Dgzuser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sdust/stos/mapper/NmuserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sdust/stos/mapper/NmuserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sdust/stos/service/NmuserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sdust/stos/service/NmuserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sdust/stos/service/impl/NmuserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sdust/stos/service/impl/NmuserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/sdust/stos/controller/LoginController1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sdust/stos/controller/LoginController1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sdust/stos/entity/Nmuser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sdust/stos/mapper/NmuserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sdust/stos/mapper/NmuserMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sdust/stos/service/NmuserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sdust/stos/service/NmuserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sdust/stos/service/impl/NmuserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sdust/stos/service/impl/NmuserServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +107,7 @@
       <workItem from="1656502747816" duration="298000" />
       <workItem from="1656503390673" duration="4964000" />
       <workItem from="1656556036522" duration="2882000" />
-      <workItem from="1656650515857" duration="2101000" />
+      <workItem from="1656650515857" duration="2417000" />
     </task>
     <servers />
   </component>

@@ -26,7 +26,7 @@ public class LoginController1 {
 
         //1.根据用户名查询该用户名是否在数据库中
         LambdaQueryWrapper<Dgzuser> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(Dgzuser::getDgzName,username);
+        queryWrapper.eq(Dgzuser::getDgzNumber,username);
         Dgzuser dgzuser = nmuserService.getOne(queryWrapper);
 
         //3.如不在，返回错误结果
@@ -41,7 +41,6 @@ public class LoginController1 {
 
         return R.success("登录成功");
     }
-
 
 
 }
