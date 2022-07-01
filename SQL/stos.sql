@@ -11,7 +11,7 @@
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 30/06/2022 11:08:25
+ Date: 01/07/2022 09:07:58
 */
 
 SET NAMES utf8mb4;
@@ -25,7 +25,6 @@ CREATE TABLE `cgmessagerr`  (
   `cg_number` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '职工号',
   `cg_name` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '职工名字',
   `cg_tel` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系方式',
-  `cg_user` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '账号',
   `cg_password` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
   PRIMARY KEY (`cg_number`) USING BTREE,
   INDEX `CGname`(`cg_name`) USING BTREE
@@ -34,7 +33,7 @@ CREATE TABLE `cgmessagerr`  (
 -- ----------------------------
 -- Records of cgmessagerr
 -- ----------------------------
-INSERT INTO `cgmessagerr` VALUES ('CG001', '采购人', '17185456350', 'cgr123', '123456');
+INSERT INTO `cgmessagerr` VALUES ('CG001', '采购人', '17185456350', '123456');
 
 -- ----------------------------
 -- Table structure for dglist
@@ -88,7 +87,6 @@ CREATE TABLE `dgzuser`  (
   `dgz_name` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '姓名',
   `dgz_dept` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所属院系',
   `dgz_tel` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系方式',
-  `dgz_user` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '账号',
   `dgz_password` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
   PRIMARY KEY (`dgz_number`) USING BTREE,
   INDEX `name`(`dgz_name`) USING BTREE,
@@ -98,8 +96,8 @@ CREATE TABLE `dgzuser`  (
 -- ----------------------------
 -- Records of dgzuser
 -- ----------------------------
-INSERT INTO `dgzuser` VALUES ('DGZ001', '张三', '计科', '16359632563', 'za123', '123456');
-INSERT INTO `dgzuser` VALUES ('DGZ002', '李四', '马原', '13356322356', 'li123', '123456');
+INSERT INTO `dgzuser` VALUES ('DGZ001', '张三', '计科', '16359632563', '123456');
+INSERT INTO `dgzuser` VALUES ('DGZ002', '李四', '马原', '13356322356', '123456');
 
 -- ----------------------------
 -- Table structure for fxmessager
@@ -109,7 +107,6 @@ CREATE TABLE `fxmessager`  (
   `fx_number` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '职工号',
   `fx_name` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '职工名字',
   `fx_tel` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系方式',
-  `fx_user` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '账号',
   `fx_password` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
   PRIMARY KEY (`fx_number`) USING BTREE,
   INDEX `fxname`(`fx_name`) USING BTREE
@@ -118,7 +115,7 @@ CREATE TABLE `fxmessager`  (
 -- ----------------------------
 -- Records of fxmessager
 -- ----------------------------
-INSERT INTO `fxmessager` VALUES ('FX001', '发行人', '14769365630', 'fxr123', '123456');
+INSERT INTO `fxmessager` VALUES ('FX001', '发行人', '14769365630', '123456');
 
 -- ----------------------------
 -- Table structure for intable
@@ -132,7 +129,7 @@ CREATE TABLE `intable`  (
   INDEX `ISBN_intable`(`isbn`) USING BTREE,
   INDEX `number`(`number`) USING BTREE,
   CONSTRAINT `ISBN_intable` FOREIGN KEY (`isbn`) REFERENCES `textmessage` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '库存表二维结构描述库存表的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '库存表二维结构描述库存表的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of intable
