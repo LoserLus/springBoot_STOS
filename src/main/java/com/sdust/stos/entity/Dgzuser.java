@@ -3,24 +3,21 @@ package com.sdust.stos.entity;
 import lombok.Data;
 
 @Data
-public class Nmuser {
+public class Dgzuser {
 
-    //编号
+    //编号(账号)
     private String dgzNumber;
 
     //姓名
     private String dgzName;
 
     //所属院系
-    private String dgzClass;
+    private String dgzDept;
 
     //联系方式
-    private String nmTel;
-
-    //账号
-    private String nmUser;
+    private String dgzTel;
 
     //密码
-    private String nmPassword;
+    private String dgzPassword;
 
 }

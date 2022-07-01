@@ -5,12 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="24b1d94d-0dda-4065-a6d8-eea2de563ef7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/vue/STOS-VUE" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/sdust/stos/controller/LoginController1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sdust/stos/controller/LoginController1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sdust/stos/entity/Nmuser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sdust/stos/entity/Nmuser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sdust/stos/entity/Nmuser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sdust/stos/entity/Dgzuser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sdust/stos/mapper/NmuserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sdust/stos/mapper/NmuserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sdust/stos/service/NmuserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sdust/stos/service/NmuserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sdust/stos/service/impl/NmuserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sdust/stos/service/impl/NmuserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/sdust/stos/controller/LoginController1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sdust/stos/controller/LoginController1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sdust/stos/entity/Nmuser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sdust/stos/mapper/NmuserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sdust/stos/mapper/NmuserMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sdust/stos/service/NmuserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sdust/stos/service/NmuserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/sdust/stos/service/impl/NmuserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sdust/stos/service/impl/NmuserServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,26 +56,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "F:/IDEA_Produt/springBoot_STOS/src/main/java/com/sdust/stos/common",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.runner",
-    "spring.configuration.checksum": "67de5f4bb10bda66d34c70c9f0ecca5b",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/IDEA_Produt/springBoot_STOS/src/main/java/com/sdust/stos/common&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.runner&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;67de5f4bb10bda66d34c70c9f0ecca5b&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\IDEA_Produt\springBoot_STOS\src\main\java\com\sdust\stos\common" />
@@ -110,7 +116,8 @@
       <workItem from="1656502353044" duration="376000" />
       <workItem from="1656502747816" duration="298000" />
       <workItem from="1656503390673" duration="4964000" />
-      <workItem from="1656556036522" duration="1508000" />
+      <workItem from="1656556036522" duration="2882000" />
+      <workItem from="1656650515857" duration="2101000" />
     </task>
     <servers />
   </component>
@@ -133,7 +140,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/sdust/stos/controller/LoginController1.java</url>
-          <line>22</line>
+          <line>23</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
