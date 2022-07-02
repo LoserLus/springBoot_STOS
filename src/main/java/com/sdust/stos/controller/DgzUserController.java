@@ -2,6 +2,8 @@ package com.sdust.stos.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.sdust.stos.common.R;
+import com.sdust.stos.dto.DgListDto;
+import com.sdust.stos.entity.DgList;
 import com.sdust.stos.entity.DgzUser;
 import com.sdust.stos.entity.TextMessage;
 import com.sdust.stos.service.DgzUserService;
@@ -38,7 +40,7 @@ public class DgzUserController {
         log.info("pwd: {}",pwd);
         log.info("type: {}",type);
 
-        //request.getSession().getAttribute();
+        request.getSession().getAttribute(username);
 
         R<String> loginUser = dgzUserService.login(username, pwd, type);
         String data = loginUser.getData();
@@ -89,5 +91,18 @@ public class DgzUserController {
         return R.success(list);
     }
 
+    /**
+     * 用户确认订购请求
+     * @param list
+     * @return
+     */
+    @PostMapping("/textorder")
+    public R<String> textorder(@RequestBody List<DgListDto> list){
+        for(int i=0;i<list.size();i++){
+            log.info("订购的书籍为：{}", list.get(i).toString());
+        }
+
+        return null;
+    }
 
 }
