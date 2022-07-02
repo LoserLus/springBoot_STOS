@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="24b1d94d-0dda-4065-a6d8-eea2de563ef7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/sdust/stos/controller/LoginController1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sdust/stos/controller/LoginController1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/sdust/stos/controller/LoginController1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/sdust/stos/controller/LoginController1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/sdust/stos/controller/DgzUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/sdust/stos/controller/DgzUserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +106,9 @@
       <workItem from="1656502747816" duration="298000" />
       <workItem from="1656503390673" duration="4964000" />
       <workItem from="1656556036522" duration="2882000" />
-      <workItem from="1656650515857" duration="2417000" />
+      <workItem from="1656650515857" duration="3273000" />
+      <workItem from="1656658484903" duration="9466000" />
+      <workItem from="1656720251858" duration="233000" />
     </task>
     <servers />
   </component>
@@ -129,9 +130,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/sdust/stos/controller/LoginController1.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/sdust/stos/controller/DgzUserController.java</url>
           <line>23</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/sdust/stos/controller/DgzUserController.java</url>
+          <line>46</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

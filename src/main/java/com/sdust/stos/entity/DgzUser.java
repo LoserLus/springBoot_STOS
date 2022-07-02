@@ -3,10 +3,13 @@ package com.sdust.stos.entity;
 import lombok.Data;
 
 @Data
-public class Dgzuser {
+public class DgzUser {
 
     //编号(账号)
-    private String dgzNumber;
+    private String dgzUsername;
+
+    //密码
+    private String dgzPassword;
 
     //姓名
     private String dgzName;
@@ -17,7 +20,6 @@ public class Dgzuser {
     //联系方式
     private String dgzTel;
 
-    //密码
-    private String dgzPassword;
+
 
 }
