@@ -2,8 +2,12 @@ package com.sdust.stos.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.sdust.stos.common.R;
+import com.sdust.stos.dto.DgListDto;
+import com.sdust.stos.entity.DgList;
 import com.sdust.stos.entity.DgzUser;
 import com.sdust.stos.entity.FxMessager;
+import com.sdust.stos.entity.TextMessage;
+import com.sdust.stos.service.DgListService;
 import com.sdust.stos.service.FxMessagerService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -23,33 +28,38 @@ public class FxMessagerController {
     @Autowired
     private FxMessagerService fxMessagerService;
 
-    @GetMapping("/login")
-    public R<String> Login(HttpServletRequest request, String username, String pwd) {
-        log.info("username: {}", username);
-        log.info("pwd: {}", pwd);
+    @Autowired
+    private DgListService dgListService;
 
-        //在session中设置当前登录的用户账号
-        request.getSession().setAttribute("nowusername", username);
+    /**
+     * 获取用户订购书籍列表
+     * @return
+     */
+    @GetMapping("/dglist")
+    public R<List<DgListDto>> dglist() {
 
-        //发行人登录
-        //1.根据用户账号查询该账号是否在数据库中
-        LambdaQueryWrapper<FxMessager> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(FxMessager::getFxUsername, username);
-        FxMessager fxMessager = fxMessagerService.getOne(queryWrapper);
+        log.info("获取用户订购书籍列表..");
 
-        //3.如不在，返回错误结果
-        if (fxMessager == null) {
-            return R.error("登录失败");
+        LambdaQueryWrapper<DgList> queryWrapper = new LambdaQueryWrapper<>();
+
+        queryWrapper.orderByAsc(DgList::getDgDate);
+
+        //获取订购列表
+        List<DgList> dgList = dgListService.list(queryWrapper);
+
+        //在订购列表中加入对应书号的名称
+        //
+
+        List<DgListDto> dgListDto = null;
+
+        for(int i=0;i<dgList.size();i++){
+
         }
 
-        //4。如在，比较该密码是否匹配，如不匹配，返回错误结果
-        if (!fxMessager.getFxPassword().equals(pwd)) {
-            return R.error("登录失败");
-        }
 
-        return R.success("登录成功");
 
+
+        return null;
     }
-
 
 }
