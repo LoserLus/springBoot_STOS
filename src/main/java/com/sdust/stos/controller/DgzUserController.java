@@ -100,10 +100,14 @@ public class DgzUserController {
             int price = textMessage.getPrice();
 
             //首先要判断当前用户是否已经订购过这本书
-            DgList DgOne = dgListService.getById(dgListDto.getDgId());
+            //bug dgListDto.getDgId() -> dgListDto.getIsbn()
+
+            //根据书号查询这本书的订购者
+            DgList DgOne = dgListService.getById(dgListDto.getIsbn());
 
             //如果当前用户已经订购过这本书，则修改这条记录的dgTotal值就行
             if (DgOne != null && DgOne.getDgzUsername() != null && nowusername.equals(DgOne.getDgzUsername())) {
+
                 //把之前订购的书籍加上这一次订购的数量
                 int dgAllTotal = DgOne.getDgTotal() + dgListDto.getDgTotal();
                 DgOne.setDgTotal(dgAllTotal);
@@ -111,18 +115,25 @@ public class DgzUserController {
                 DgOne.setDgDate(LocalDateTime.now());
                 DgOne.setDgId("DG" + System.currentTimeMillis());
 
-                //执行更新该条数据操作
-                LambdaQueryWrapper<DgList> queryWrapper = new LambdaQueryWrapper<>();
-                queryWrapper.setEntity(DgOne);
+                //先把该条记录删除
+                //dgListService.removeById(DgOne.getDgId());
 
+                //执行更新操作
+               LambdaQueryWrapper<DgList> queryWrapper = new LambdaQueryWrapper<>();
+               queryWrapper.eq(DgList::getIsbn,DgOne.getIsbn());
+               dgListService.update(DgOne,queryWrapper);
+
+            }else{
+
+                //如果当前用户没有订购过这本书，把这个书籍信息放入订购表中
+                dgListDto.setDgAmount(price * dgListDto.getDgTotal());
+                dgListDto.setDgDate(LocalDateTime.now());
+                dgListDto.setDgId("DG" + System.currentTimeMillis());
+                dgListDto.setDgzUsername(nowusername);
+
+                dgListService.save(dgListDto);
             }
-            //如果当前用户没有订购过这本书，把这个书籍信息放入订购表中
-            dgListDto.setDgAmount(price * dgListDto.getDgTotal());
-            dgListDto.setDgDate(LocalDateTime.now());
-            dgListDto.setDgId("DG" + System.currentTimeMillis());
-            dgListDto.setDgzUsername(nowusername);
 
-            dgListService.save(dgListDto);
         }
 
         return R.success("成功订购");

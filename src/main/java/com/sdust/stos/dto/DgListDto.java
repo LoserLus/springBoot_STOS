@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 public class DgListDto extends DgList{
 
-    private List<DgList> list = new ArrayList<>();
+    //private List<DgList> list = new ArrayList<>();
 
     //书名
     private String bookName;
