@@ -3,8 +3,10 @@ package com.sdust.stos.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class TextMessage {
+public class TextMessage implements Serializable {
 
     //书号
     @TableId(value = "isbn")

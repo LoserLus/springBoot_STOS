@@ -2,8 +2,10 @@ package com.sdust.stos.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class DgzUser {
+public class DgzUser implements Serializable {
 
     //编号(账号)
     private String dgzUsername;

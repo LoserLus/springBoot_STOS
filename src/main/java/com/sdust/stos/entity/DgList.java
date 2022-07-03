@@ -4,11 +4,12 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 //@JsonIgnoreProperties(ignoreUnknown = true)
-public class DgList {
+public class DgList implements Serializable {
 
 
     //订购单号
