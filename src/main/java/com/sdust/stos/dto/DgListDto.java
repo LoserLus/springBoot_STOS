@@ -13,7 +13,11 @@ public class DgListDto extends DgList{
 
     private List<DgList> list = new ArrayList<>();
 
+    //书名
     private String bookName;
+
+    //书籍库存
+    private Integer stock;
 
 
 }

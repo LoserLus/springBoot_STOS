@@ -3,20 +3,16 @@ package com.sdust.stos.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.sdust.stos.common.R;
 import com.sdust.stos.dto.DgListDto;
-import com.sdust.stos.entity.DgList;
-import com.sdust.stos.entity.DgzUser;
-import com.sdust.stos.entity.FxMessager;
-import com.sdust.stos.entity.TextMessage;
+import com.sdust.stos.entity.*;
 import com.sdust.stos.service.DgListService;
 import com.sdust.stos.service.FxMessagerService;
+import com.sdust.stos.service.InTableService;
 import com.sdust.stos.service.TextMessageService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -37,6 +33,9 @@ public class FxMessagerController {
 
     @Autowired
     private TextMessageService textMessageService;
+
+    @Autowired
+    private InTableService inTableService;
 
     /**
      * 获取用户订购书籍列表
@@ -74,10 +73,38 @@ public class FxMessagerController {
                 dgListDto1.setBookName(bookName);
             }
 
+            //从书库中获取这本书的库存
+            LambdaQueryWrapper<InTable> queryWrapper1 = new LambdaQueryWrapper<>();
+            queryWrapper1.eq(InTable::getIsbn,isbn);
+            InTable inTable = inTableService.getOne(queryWrapper1);
+
+            if(inTable != null){
+                Integer stock = inTable.getStock();
+                dgListDto1.setStock(stock);
+            }
+
             return dgListDto1;
         }).collect(Collectors.toList());
 
         return R.success(dgListDto);
     }
+
+    /**
+     * 发书功能
+     * @return
+     */
+    @GetMapping("/release")
+    public R<String> release(@RequestBody DgListDto dgListDto){
+
+        //能够发书，修改库存
+
+        //这个订书单完成，加入到领书单里面
+
+        return null;
+    }
+
+
+
+
 
 }
