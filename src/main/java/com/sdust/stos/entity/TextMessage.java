@@ -1,11 +1,13 @@
 package com.sdust.stos.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 @Data
 public class TextMessage {
 
     //书号
+    @TableId(value = "isbn")
     private String isbn;
 
     //书名
