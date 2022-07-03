@@ -11,7 +11,7 @@
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 01/07/2022 20:28:00
+ Date: 03/07/2022 19:10:37
 */
 
 SET NAMES utf8mb4;
@@ -58,7 +58,7 @@ CREATE TABLE `dg_list`  (
 -- Records of dg_list
 -- ----------------------------
 INSERT INTO `dg_list` VALUES ('DG001', 'DGZ001', '9787100186438', '2022-06-01 15:43:57', 1, 34);
-INSERT INTO `dg_list` VALUES ('DG002', 'DGZ002', '9787201077642', '2022-06-02 15:46:53', 2, 40);
+INSERT INTO `dg_list` VALUES ('DG002', 'DGZ002', '9787201077642', '2022-06-02 15:46:53', 560, 22400);
 
 -- ----------------------------
 -- Table structure for dgz_user
@@ -112,7 +112,7 @@ CREATE TABLE `in_table`  (
   INDEX `ISBN_intable`(`isbn`) USING BTREE,
   INDEX `number`(`stock`) USING BTREE,
   CONSTRAINT `ISBN_intable` FOREIGN KEY (`isbn`) REFERENCES `text_message` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '库存表二维结构描述库存表的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '库存表二维结构描述库存表的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of in_table
@@ -143,17 +143,18 @@ CREATE TABLE `js_list`  (
   `cg_date` datetime(0) NULL DEFAULT NULL COMMENT '采购日期',
   `cg_total` int(0) NULL DEFAULT NULL COMMENT '采购总数',
   `cg_amount` int(0) NOT NULL COMMENT '采购总额',
+  `cg_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '采购标记',
   PRIMARY KEY (`js_id`) USING BTREE,
   INDEX `ISBN_jslist`(`isbn`) USING BTREE,
   INDEX `cg_username_js`(`cg_username`) USING BTREE,
-  CONSTRAINT `ISBN_js` FOREIGN KEY (`isbn`) REFERENCES `text_message` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `cg_username_js` FOREIGN KEY (`cg_username`) REFERENCES `cg_messagerr` (`cg_username`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `cg_username_js` FOREIGN KEY (`cg_username`) REFERENCES `cg_messagerr` (`cg_username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `ISBN_js` FOREIGN KEY (`isbn`) REFERENCES `text_message` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '进书单二维结构描述了进书单表格的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of js_list
 -- ----------------------------
-INSERT INTO `js_list` VALUES ('JS001', '9787521737035', NULL, '2022-06-02 15:22:49', NULL, 5000);
+INSERT INTO `js_list` VALUES ('JS001', '9787521737035', NULL, '2022-06-02 15:22:49', NULL, 5000, 0);
 
 -- ----------------------------
 -- Table structure for ls_list
@@ -174,8 +175,8 @@ CREATE TABLE `ls_list`  (
 -- ----------------------------
 -- Records of ls_list
 -- ----------------------------
-INSERT INTO `ls_list` VALUES ('LS001', 'DG001', '2022-06-03 15:44:38', NULL);
-INSERT INTO `ls_list` VALUES ('LS002', 'DG002', '2022-06-04 15:46:53', NULL);
+INSERT INTO `ls_list` VALUES ('LS001', 'DG001', '2022-06-03 15:44:38', 'FX001');
+INSERT INTO `ls_list` VALUES ('LS002', 'DG002', '2022-06-04 15:46:53', 'FX001');
 
 -- ----------------------------
 -- Table structure for qs_list
