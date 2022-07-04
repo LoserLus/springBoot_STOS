@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : test
+ Source Server         : 本地
  Source Server Type    : MySQL
- Source Server Version : 80026
+ Source Server Version : 80011
  Source Host           : localhost:3306
  Source Schema         : stos
 
  Target Server Type    : MySQL
- Target Server Version : 80026
+ Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 03/07/2022 19:10:37
+ Date: 04/07/2022 11:19:46
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `cg_messagerr`  (
   `cg_tel` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系方式',
   PRIMARY KEY (`cg_username`) USING BTREE,
   INDEX `CGname`(`cg_name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '教材采购人员二维结构描述教材采购人员表的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '教材采购人员二维结构描述教材采购人员表的属性，方便进行数据库设计。' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of cg_messagerr
@@ -43,21 +43,18 @@ CREATE TABLE `dg_list`  (
   `dg_id` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订购单号',
   `dgz_username` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订购者账号',
   `isbn` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '书号',
-  `dg_date` datetime(0) NULL DEFAULT NULL COMMENT '日期',
-  `dg_total` int(0) NULL DEFAULT NULL COMMENT '购书总数',
-  `dg_amount` int(0) NULL DEFAULT NULL COMMENT '总额',
+  `dg_date` datetime NULL DEFAULT NULL COMMENT '日期',
+  `dg_total` int(11) NULL DEFAULT NULL COMMENT '购书总数',
+  `dg_amount` int(11) NULL DEFAULT NULL COMMENT '总额',
   PRIMARY KEY (`dg_id`) USING BTREE,
   INDEX `DSZnumber_user`(`dgz_username`) USING BTREE,
   INDEX `ISBN_dg`(`isbn`) USING BTREE,
-  INDEX `DGnumber`(`dg_id`, `dgz_username`) USING BTREE,
-  CONSTRAINT `DSZnumber_user` FOREIGN KEY (`dgz_username`) REFERENCES `dgz_user` (`dgz_username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ISBN_dg` FOREIGN KEY (`isbn`) REFERENCES `text_message` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订购单二维结构描述了订购单表格的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
+  INDEX `DGnumber`(`dg_id`, `dgz_username`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订购单二维结构描述了订购单表格的属性，方便进行数据库设计。' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dg_list
 -- ----------------------------
-INSERT INTO `dg_list` VALUES ('DG001', 'DGZ001', '9787100186438', '2022-06-01 15:43:57', 1, 34);
 INSERT INTO `dg_list` VALUES ('DG002', 'DGZ002', '9787201077642', '2022-06-02 15:46:53', 560, 22400);
 
 -- ----------------------------
@@ -74,7 +71,7 @@ CREATE TABLE `dgz_user`  (
   INDEX `name`(`dgz_name`) USING BTREE,
   INDEX `tel`(`dgz_tel`) USING BTREE,
   INDEX `dgz_user`(`dgz_username`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '普通用户（学生、老师）信息二维结构描述了学生信息表格的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '普通用户（学生、老师）信息二维结构描述了学生信息表格的属性，方便进行数据库设计。' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dgz_user
@@ -93,7 +90,7 @@ CREATE TABLE `fx_messager`  (
   `fx_tel` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系方式',
   PRIMARY KEY (`fx_username`) USING BTREE,
   INDEX `fxname`(`fx_name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '教材发行人员二维结构描述教材发行人员表格的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '教材发行人员二维结构描述教材发行人员表格的属性，方便进行数据库设计。' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of fx_messager
@@ -105,14 +102,13 @@ INSERT INTO `fx_messager` VALUES ('FX001', '123456', '发行人', '14769365630')
 -- ----------------------------
 DROP TABLE IF EXISTS `in_table`;
 CREATE TABLE `in_table`  (
-  `id` int(0) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `isbn` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '书号',
-  `stock` int(0) NOT NULL COMMENT '库存数量',
+  `stock` int(11) NOT NULL COMMENT '库存数量',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ISBN_intable`(`isbn`) USING BTREE,
-  INDEX `number`(`stock`) USING BTREE,
-  CONSTRAINT `ISBN_intable` FOREIGN KEY (`isbn`) REFERENCES `text_message` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '库存表二维结构描述库存表的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
+  INDEX `number`(`stock`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '库存表二维结构描述库存表的属性，方便进行数据库设计。' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of in_table
@@ -130,7 +126,7 @@ INSERT INTO `in_table` VALUES (10, '9787506379786', 350);
 INSERT INTO `in_table` VALUES (11, '9787505745766', 450);
 INSERT INTO `in_table` VALUES (12, '9787500601593', 500);
 INSERT INTO `in_table` VALUES (13, '9787201077642', 550);
-INSERT INTO `in_table` VALUES (14, '9787100186438', 560);
+INSERT INTO `in_table` VALUES (14, '9787100186438', 559);
 
 -- ----------------------------
 -- Table structure for js_list
@@ -140,16 +136,14 @@ CREATE TABLE `js_list`  (
   `js_id` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '进书编号',
   `isbn` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '书号',
   `cg_username` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '采购人账号',
-  `cg_date` datetime(0) NULL DEFAULT NULL COMMENT '采购日期',
-  `cg_total` int(0) NULL DEFAULT NULL COMMENT '采购总数',
-  `cg_amount` int(0) NOT NULL COMMENT '采购总额',
+  `cg_date` datetime NULL DEFAULT NULL COMMENT '采购日期',
+  `cg_total` int(11) NULL DEFAULT NULL COMMENT '采购总数',
+  `cg_amount` int(11) NOT NULL COMMENT '采购总额',
   `cg_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '采购标记',
   PRIMARY KEY (`js_id`) USING BTREE,
   INDEX `ISBN_jslist`(`isbn`) USING BTREE,
-  INDEX `cg_username_js`(`cg_username`) USING BTREE,
-  CONSTRAINT `cg_username_js` FOREIGN KEY (`cg_username`) REFERENCES `cg_messagerr` (`cg_username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ISBN_js` FOREIGN KEY (`isbn`) REFERENCES `text_message` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '进书单二维结构描述了进书单表格的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
+  INDEX `cg_username_js`(`cg_username`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '进书单二维结构描述了进书单表格的属性，方便进行数据库设计。' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of js_list
@@ -163,20 +157,19 @@ DROP TABLE IF EXISTS `ls_list`;
 CREATE TABLE `ls_list`  (
   `ls_id` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '领书单号',
   `dg_id` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '订购单号',
-  `ls_date` datetime(0) NULL DEFAULT NULL COMMENT '领书日期',
+  `ls_date` datetime NULL DEFAULT NULL COMMENT '领书日期',
   `ls_username` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '经办人',
   PRIMARY KEY (`ls_id`) USING BTREE,
   INDEX `DGnumber_ls`(`dg_id`) USING BTREE,
-  INDEX `ls_username`(`ls_username`) USING BTREE,
-  CONSTRAINT `dg_id_ls` FOREIGN KEY (`dg_id`) REFERENCES `dg_list` (`dg_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ls_username` FOREIGN KEY (`ls_username`) REFERENCES `fx_messager` (`fx_username`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '领书单二维结构描述了领书单表格的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
+  INDEX `ls_username`(`ls_username`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '领书单二维结构描述了领书单表格的属性，方便进行数据库设计。' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ls_list
 -- ----------------------------
 INSERT INTO `ls_list` VALUES ('LS001', 'DG001', '2022-06-03 15:44:38', 'FX001');
 INSERT INTO `ls_list` VALUES ('LS002', 'DG002', '2022-06-04 15:46:53', 'FX001');
+INSERT INTO `ls_list` VALUES ('LS1656904559757', 'DG001', '2022-07-04 11:16:01', 'FX001');
 
 -- ----------------------------
 -- Table structure for qs_list
@@ -185,14 +178,12 @@ DROP TABLE IF EXISTS `qs_list`;
 CREATE TABLE `qs_list`  (
   `qs_id` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '缺书单号',
   `isbn` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '书号',
-  `qs_total` int(0) NULL DEFAULT NULL COMMENT '数量',
+  `qs_total` int(11) NULL DEFAULT NULL COMMENT '数量',
   `qs_username` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '经办人',
   PRIMARY KEY (`qs_id`) USING BTREE,
   INDEX `ISBN_qslist`(`isbn`) USING BTREE,
-  INDEX `qs_username`(`qs_username`) USING BTREE,
-  CONSTRAINT `ISBN_qslist` FOREIGN KEY (`isbn`) REFERENCES `text_message` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `qs_username` FOREIGN KEY (`qs_username`) REFERENCES `fx_messager` (`fx_username`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '缺书单二维结构描述了缺书单表格的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
+  INDEX `qs_username`(`qs_username`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '缺书单二维结构描述了缺书单表格的属性，方便进行数据库设计。' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of qs_list
@@ -208,13 +199,13 @@ CREATE TABLE `text_message`  (
   `book_name` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '书名',
   `author` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '作者',
   `publish` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '出版社',
-  `price` int(0) NOT NULL COMMENT '单价',
+  `price` int(11) NOT NULL COMMENT '单价',
   PRIMARY KEY (`isbn`) USING BTREE,
   INDEX `ISBN`(`isbn`) USING BTREE,
   INDEX `author`(`author`) USING BTREE,
   INDEX `publish`(`publish`) USING BTREE,
   INDEX `price`(`price`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '教材信息二维结构描述了教材信息表格的属性，方便进行数据库设计。' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '教材信息二维结构描述了教材信息表格的属性，方便进行数据库设计。' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of text_message
