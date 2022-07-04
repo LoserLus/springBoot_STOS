@@ -81,14 +81,15 @@ public class DgzUserController {
      * @return
      */
     @PostMapping("/textorder")
-    public R<String> textorder(HttpServletRequest request, @RequestBody List<DgListDto> list) {
+    public R<String> textorder(HttpServletRequest request, @RequestBody List<DgListDto> list,String username) {
         for (int i = 0; i < list.size(); i++) {
             DgListDto dgListDto = list.get(i);
             log.info("订购的书籍为：{}", dgListDto);
         }
 
         //在session中设置当前登录的用户账号
-        String nowusername = (String) request.getSession().getAttribute("nowusername");
+        //String nowusername = (String) request.getSession().getAttribute("nowusername");
+        String nowusername = username;
 
         for (int i = 0; i < list.size(); i++) {
             //从列表中获取当个书籍
