@@ -95,7 +95,7 @@ public class FxMessagerController {
      * 发书功能
      * @return
      */
-    @GetMapping("/release")
+    @PostMapping("/release")
     @Transactional
     public R<String> release(@RequestBody DgListDto dgListDto){
 

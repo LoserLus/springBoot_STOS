@@ -15,8 +15,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Slf4j
 @SpringBootApplication
 @ServletComponentScan
-@EnableSwagger2
 @EnableTransactionManagement
+@EnableSwagger2
 public class STOS_Application {
     public static void main(String[] args) {
         SpringApplication.run(STOS_Application.class,args);
