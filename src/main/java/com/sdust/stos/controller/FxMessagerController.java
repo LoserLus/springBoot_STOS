@@ -4,17 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.sdust.stos.common.R;
 import com.sdust.stos.dto.DgListDto;
 import com.sdust.stos.entity.*;
-import com.sdust.stos.service.DgListService;
-import com.sdust.stos.service.FxMessagerService;
-import com.sdust.stos.service.InTableService;
-import com.sdust.stos.service.TextMessageService;
+import com.sdust.stos.service.*;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,6 +35,9 @@ public class FxMessagerController {
 
     @Autowired
     private InTableService inTableService;
+
+    @Autowired
+    private LsListService lsListService;
 
     /**
      * 获取用户订购书籍列表
@@ -94,11 +96,46 @@ public class FxMessagerController {
      * @return
      */
     @GetMapping("/release")
+    @Transactional
     public R<String> release(@RequestBody DgListDto dgListDto){
 
-        //能够发书，修改库存
+        //根据书号从书库获取这本书的库存信息
+        LambdaQueryWrapper<InTable> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(InTable::getIsbn,dgListDto.getIsbn());
+        InTable inTable = inTableService.getOne(queryWrapper);
+
+        //修改这本书的库存数量
+        Integer dgTotal = dgListDto.getDgTotal();
+        Integer stock = dgListDto.getStock();
+        int nowStock = stock - dgTotal;
+
+        //把这本书的库存重新更新到库存表中
+        inTable.setStock(nowStock);
+        inTableService.update(inTable,queryWrapper);
 
         //这个订书单完成，加入到领书单里面
+        LsList lsList = new LsList();
+        lsList.setLsId("LS"+ System.currentTimeMillis());
+        lsList.setDgId(dgListDto.getDgId());
+        lsList.setLsDate(LocalDateTime.now());
+        lsList.setLsUsername(dgListDto.getFxUsername());
+        lsListService.save(lsList);
+
+        //把这个订单删除
+        LambdaQueryWrapper<DgList> queryWrapper1 = new LambdaQueryWrapper<>();
+        queryWrapper1.eq(DgList::getDgId,dgListDto.getDgId());
+        dgListService.remove(queryWrapper1);
+
+        return R.success("发书成功");
+    }
+
+    /**
+     * 采购功能
+     * @return
+     */
+    @PostMapping("/purchase")
+    public R<String> purchase(List<DgListDto> list){
+
 
         return null;
     }

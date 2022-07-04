@@ -19,5 +19,10 @@ public class DgListDto extends DgList{
     //书籍库存
     private Integer stock;
 
+    //发行人账号
+    private String fxUsername;
+
+    //订购者账号
+    private String dgzUsername;
 
 }
