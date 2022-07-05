@@ -64,6 +64,7 @@ public class DgzUserController {
      *
      * @return
      */
+
     @GetMapping("/textlist")
     public R<List<TextMessage>> textlist() {
 
@@ -88,13 +89,13 @@ public class DgzUserController {
         }
 
         //在session中设置当前登录的用户账号
-        //String nowusername = (String) request.getSession().getAttribute("nowusername");
+        String nowusername = (String) request.getSession().getAttribute("nowusername");
 
         for (int i = 0; i < list.size(); i++) {
             //从列表中获取当个书籍
             DgListDto dgListDto = list.get(i);
 
-            String nowusername = dgListDto.getDgzUsername();
+            //String nowusername = dgListDto.getDgzUsername();
 
             //查询当前书籍的单价是多少
             TextMessage textMessage = textMessageService.getById(dgListDto.getIsbn());

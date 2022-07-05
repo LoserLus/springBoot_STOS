@@ -3,9 +3,11 @@ package com.sdust.stos.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.sdust.stos.common.R;
 import com.sdust.stos.dto.DgListDto;
+import com.sdust.stos.dto.QsListDto;
 import com.sdust.stos.entity.*;
 import com.sdust.stos.service.*;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,7 @@ public class FxMessagerController {
      * @return
      */
     @GetMapping("/dglist")
+    @ApiOperation(value = "获取订购单")
     public R<List<DgListDto>> dglist() {
 
         log.info("获取用户订购书籍列表..");
@@ -97,6 +100,7 @@ public class FxMessagerController {
      */
     @PostMapping("/release")
     @Transactional
+    @ApiOperation(value = "发放书籍")
     public R<String> release(@RequestBody DgListDto dgListDto){
 
         //根据书号从书库获取这本书的库存信息
@@ -130,11 +134,34 @@ public class FxMessagerController {
     }
 
     /**
+     * 发送缺书单
+     * @return
+     */
+    @PostMapping("/sendLockB")
+    @ApiOperation(value = "发送缺书单")
+    public R<String> sendLockB(List<QsList> list){
+
+        return null;
+    }
+
+
+    @GetMapping("/getLockB")
+    @ApiOperation(value = "获取缺书单")
+    public R<List<QsListDto>> getLockB(){
+
+        return null;
+    }
+
+
+    /**
      * 采购功能
      * @return
      */
     @PostMapping("/purchase")
+    @ApiOperation(value = "执行采购功能")
     public R<String> purchase(List<DgListDto> list){
+
+        //把缺的书汇总起来保存到进书表中
 
 
         return null;

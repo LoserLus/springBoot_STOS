@@ -23,6 +23,9 @@ public class DgListDto extends DgList{
     private String fxUsername;
 
     //订购者账号
-    private String dgzUsername;
+    //private String dgzUsername;
+
+    //缺的书的数量
+    private Integer lackNumer;
 
 }
