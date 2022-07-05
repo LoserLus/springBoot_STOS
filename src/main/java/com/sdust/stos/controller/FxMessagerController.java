@@ -61,7 +61,8 @@ public class FxMessagerController {
      */
     @PostMapping("/sendLockB")
     @ApiOperation(value = "发送缺书单")
-    public R<String> sendLockB(HttpServletRequest request,List<QsList> list){
+    public R<String> sendLockB(HttpServletRequest request,@RequestBody List<QsList> list){
+        log.info("发放缺书单..");
 
         return fxMessagerService.sendLockB(request,list);
     }
@@ -73,6 +74,7 @@ public class FxMessagerController {
     @GetMapping("/getLockB")
     @ApiOperation(value = "获取缺书单")
     public R<List<QsListDto>> getLockB(){
+        log.info("获取缺书单..");
 
         return fxMessagerService.getLockB();
     }
