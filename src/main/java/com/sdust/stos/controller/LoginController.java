@@ -45,7 +45,7 @@ public class LoginController {
         log.info("pwd: {}", pwd);
 
         //在session中设置当前登录的用户账号
-        request.getSession().setAttribute("username",username);
+        request.getSession().setAttribute("nowusername",username);
         //教师和学生登录
         //1.根据用户账号查询该账号是否在数据库中
         LambdaQueryWrapper<DgzUser> queryWrapper = new LambdaQueryWrapper<>();
@@ -84,7 +84,7 @@ public class LoginController {
         log.info("pwd: {}", pwd);
 
         //在session中设置当前登录的用户账号
-        request.getSession().setAttribute("username",username);
+        request.getSession().setAttribute("nowusername",username);
 
         //发行人登录
         //1.根据用户账号查询该账号是否在数据库中
@@ -125,7 +125,7 @@ public class LoginController {
         log.info("pwd: {}", pwd);
 
         //在session中设置当前登录的用户账号
-        request.getSession().setAttribute("username",username);
+        request.getSession().setAttribute("nowusername",username);
         //采购人登录
         //1.根据用户账号查询该账号是否在数据库中
         LambdaQueryWrapper<CgMessager> queryWrapper = new LambdaQueryWrapper<>();
