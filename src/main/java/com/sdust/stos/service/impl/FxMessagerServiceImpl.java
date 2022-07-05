@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sdust.stos.common.R;
 import com.sdust.stos.dto.DgListDto;
+import com.sdust.stos.dto.QsListDto;
 import com.sdust.stos.entity.*;
 import com.sdust.stos.mapper.FxMessagerMapper;
 import com.sdust.stos.service.*;
@@ -11,6 +12,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -77,7 +79,11 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
     }
 
     @Override
-    public R<String> release(DgListDto dgListDto) {
+    public R<String> release(HttpServletRequest request, DgListDto dgListDto) {
+
+        //在session中设置当前登录的用户账号
+        String nowusername = (String) request.getSession().getAttribute("nowusername");
+
         //根据书号从书库获取这本书的库存信息
         LambdaQueryWrapper<InTable> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(InTable::getIsbn,dgListDto.getIsbn());
@@ -97,7 +103,7 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
         lsList.setLsId("LS"+ System.currentTimeMillis());
         lsList.setDgId(dgListDto.getDgId());
         lsList.setLsDate(LocalDateTime.now());
-        lsList.setLsUsername(dgListDto.getFxUsername());
+        lsList.setLsUsername(nowusername);
         lsListService.save(lsList);
 
         //把这个订单删除
@@ -106,6 +112,40 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
         dgListService.remove(queryWrapper1);
 
         return R.success("发书成功");
+    }
+
+    /**
+     * 发送缺书单
+     * @return
+     */
+    @Override
+    public R<String> sendLockB(HttpServletRequest request,List<QsList> list) {
+
+        //在session中设置当前登录的用户账号
+        String nowusername = (String) request.getSession().getAttribute("nowusername");
+
+
+
+
+        return null;
+    }
+
+    /**
+     * 获取缺书单
+     * @return
+     */
+    @Override
+    public R<List<QsListDto>> getLockB() {
+        return null;
+    }
+
+    /**
+     * 发行人采购功能
+     * @return
+     */
+    @Override
+    public R<String> purchase(List<DgListDto> list) {
+        return null;
     }
 
 

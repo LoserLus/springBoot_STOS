@@ -29,18 +29,6 @@ public class FxMessagerController {
     @Autowired
     private FxMessagerService fxMessagerService;
 
-    @Autowired
-    private DgListService dgListService;
-
-    @Autowired
-    private TextMessageService textMessageService;
-
-    @Autowired
-    private InTableService inTableService;
-
-    @Autowired
-    private LsListService lsListService;
-
     /**
      * 获取用户订购书籍列表
      * @return
@@ -61,10 +49,10 @@ public class FxMessagerController {
     @PostMapping("/release")
     @Transactional
     @ApiOperation(value = "发放书籍")
-    public R<String> release(@RequestBody DgListDto dgListDto){
+    public R<String> release(HttpServletRequest request, @RequestBody DgListDto dgListDto){
         log.info("发放书籍..");
 
-        return fxMessagerService.release(dgListDto);
+        return fxMessagerService.release(request,dgListDto);
     }
 
     /**
@@ -73,9 +61,9 @@ public class FxMessagerController {
      */
     @PostMapping("/sendLockB")
     @ApiOperation(value = "发送缺书单")
-    public R<String> sendLockB(List<QsList> list){
+    public R<String> sendLockB(HttpServletRequest request,List<QsList> list){
 
-        return null;
+        return fxMessagerService.sendLockB(request,list);
     }
 
     /**
@@ -86,7 +74,7 @@ public class FxMessagerController {
     @ApiOperation(value = "获取缺书单")
     public R<List<QsListDto>> getLockB(){
 
-        return null;
+        return fxMessagerService.getLockB();
     }
 
 
@@ -100,7 +88,7 @@ public class FxMessagerController {
 
         //把缺的书汇总起来保存到进书表中
 
-        return null;
+        return fxMessagerService.purchase(list);
     }
 
 

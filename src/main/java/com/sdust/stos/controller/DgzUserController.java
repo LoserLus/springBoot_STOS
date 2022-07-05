@@ -27,12 +27,6 @@ public class DgzUserController {
     @Autowired
     private DgzUserService dgzUserService;
 
-    @Autowired
-    private TextMessageService textMessageService;
-
-    @Autowired
-    private DgListService dgListService;
-
     /**
      * 学生注册
      *
@@ -53,7 +47,6 @@ public class DgzUserController {
      */
     @GetMapping("/textlist")
     public R<List<TextMessage>> textlist() {
-
         log.info("获取仓库里面的书籍列表..");
 
         return dgzUserService.textlist();
