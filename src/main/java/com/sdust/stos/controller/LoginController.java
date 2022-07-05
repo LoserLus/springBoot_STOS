@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.processing.Messager;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @Slf4j
@@ -33,18 +34,18 @@ public class LoginController {
 
     /**
      * 普通用户登录（老师学生）
+     *
      * @param request
      * @param username
      * @param pwd
      */
     @GetMapping("/userlogin")
-    public R<String> userLogin(HttpServletRequest request, String username, String pwd) {
+    public R<String> userLogin(HttpServletRequest request, HttpServletResponse response, String username, String pwd) {
         log.info("username: {}", username);
         log.info("pwd: {}", pwd);
 
         //在session中设置当前登录的用户账号
-        request.getSession().setAttribute("nowusername", username);
-
+        request.getSession().setAttribute("username",username);
         //教师和学生登录
         //1.根据用户账号查询该账号是否在数据库中
         LambdaQueryWrapper<DgzUser> queryWrapper = new LambdaQueryWrapper<>();
@@ -60,25 +61,30 @@ public class LoginController {
         if (!oneDgzUser.getDgzPassword().equals(pwd)) {
             return R.error("登录失败");
         }
-
+        //增加额外cookie,用于前台判断登录状态
+        Cookie cookie = new Cookie("session_id",username);
+        cookie.setHttpOnly(false);
+        cookie.setPath("/");
+        response.addCookie(cookie);
         return R.success("登录成功");
     }
 
 
     /**
      * 发行人登录
+     *
      * @param request
      * @param username
      * @param pwd
      * @return
      */
     @GetMapping("/fxlogin")
-    public R<String> fxLogin(HttpServletRequest request, String username, String pwd) {
+    public R<String> fxLogin(HttpServletRequest request,HttpServletResponse response, String username, String pwd) {
         log.info("username: {}", username);
         log.info("pwd: {}", pwd);
 
         //在session中设置当前登录的用户账号
-        request.getSession().setAttribute("nowusername", username);
+        request.getSession().setAttribute("username",username);
 
         //发行人登录
         //1.根据用户账号查询该账号是否在数据库中
@@ -95,7 +101,11 @@ public class LoginController {
         if (!fxMessager.getFxPassword().equals(pwd)) {
             return R.error("登录失败");
         }
-
+        //增加额外cookie,用于前台判断登录状态
+        Cookie cookie = new Cookie("session_id",username);
+        cookie.setHttpOnly(false);
+        cookie.setPath("/");
+        response.addCookie(cookie);
         return R.success("登录成功");
 
     }
@@ -103,19 +113,19 @@ public class LoginController {
 
     /**
      * 采购人登录
+     *
      * @param request
      * @param username
      * @param pwd
      * @return
      */
     @GetMapping("/cglogin")
-    public R<String> cgLogin(HttpServletRequest request, String username, String pwd) {
+    public R<String> cgLogin(HttpServletRequest request,HttpServletResponse response, String username, String pwd) {
         log.info("username: {}", username);
         log.info("pwd: {}", pwd);
 
         //在session中设置当前登录的用户账号
-        request.getSession().setAttribute("nowusername", username);
-
+        request.getSession().setAttribute("username",username);
         //采购人登录
         //1.根据用户账号查询该账号是否在数据库中
         LambdaQueryWrapper<CgMessager> queryWrapper = new LambdaQueryWrapper<>();
@@ -131,7 +141,11 @@ public class LoginController {
         if (!cgMessager.getCgPassword().equals(pwd)) {
             return R.error("登录失败");
         }
-
+        //增加额外cookie,用于前台判断登录状态
+        Cookie cookie = new Cookie("session_id",username);
+        cookie.setHttpOnly(false);
+        cookie.setPath("/");
+        response.addCookie(cookie);
         return R.success("登录成功");
 
     }
