@@ -34,7 +34,7 @@ public class FxMessagerController {
      * @return
      */
     @GetMapping("/dglist")
-    @ApiOperation(value = "获取订购单")
+    @ApiOperation(value = "获取订购单",notes = "不需要传参数，返回的是订购单列表")
     public R<List<DgListDto>> dglist() {
 
         log.info("获取用户订购书籍列表..");
@@ -48,7 +48,7 @@ public class FxMessagerController {
      */
     @PostMapping("/release")
     @Transactional
-    @ApiOperation(value = "发放书籍")
+    @ApiOperation(value = "发放书籍",notes = "需要发送的是一个list，其中包括订单号，订购者账号，书号，书的数量，库存量，返回的是提示信息（成功/失败）")
     public R<String> release(HttpServletRequest request, @RequestBody DgListDto dgListDto){
         log.info("发放书籍..");
 
@@ -60,7 +60,7 @@ public class FxMessagerController {
      * @return
      */
     @PostMapping("/sendLockB")
-    @ApiOperation(value = "发送缺书单")
+    @ApiOperation(value = "发送缺书单",notes = "需要发送的是一个list，其中包括书号，缺书总数，订单号，返回的是提示信息（成功/失败）")
     public R<String> sendLockB(HttpServletRequest request,@RequestBody List<QsListDto> list){
         log.info("发送缺书单..");
 
@@ -72,7 +72,7 @@ public class FxMessagerController {
      * @return
      */
     @GetMapping("/getLockB")
-    @ApiOperation(value = "获取缺书单")
+    @ApiOperation(value = "获取缺书单",notes = "不要传递参数，返回的是缺书列表，包括书的名称")
     public R<List<QsListDto>> getLockB(){
         log.info("获取缺书单..");
 
@@ -85,7 +85,7 @@ public class FxMessagerController {
      * @return
      */
     @PostMapping("/purchase")
-    @ApiOperation(value = "发行人采购功能")
+    @ApiOperation(value = "发行人采购功能",notes = "需要发送的是一个list，其中包括缺书单号，书号，缺书数量，返回的是提示信息（成功/失败）")
     public R<String> purchase(@RequestBody List<QsList> list){
 
         log.info("给采购人员发送进书单..");

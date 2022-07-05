@@ -11,17 +11,17 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 04/07/2022 11:19:46
+ Date: 05/07/2022 19:17:04
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for cg_messagerr
+-- Table structure for cg_messager
 -- ----------------------------
-DROP TABLE IF EXISTS `cg_messagerr`;
-CREATE TABLE `cg_messagerr`  (
+DROP TABLE IF EXISTS `cg_messager`;
+CREATE TABLE `cg_messager`  (
   `cg_username` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '账号',
   `cg_password` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
   `cg_name` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '职工名字',
@@ -31,9 +31,9 @@ CREATE TABLE `cg_messagerr`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '教材采购人员二维结构描述教材采购人员表的属性，方便进行数据库设计。' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of cg_messagerr
+-- Records of cg_messager
 -- ----------------------------
-INSERT INTO `cg_messagerr` VALUES ('CG001', '123456', '采购人', '17185456350');
+INSERT INTO `cg_messager` VALUES ('CG001', '123456', '采购人', '17185456350');
 
 -- ----------------------------
 -- Table structure for dg_list
@@ -55,7 +55,6 @@ CREATE TABLE `dg_list`  (
 -- ----------------------------
 -- Records of dg_list
 -- ----------------------------
-INSERT INTO `dg_list` VALUES ('DG002', 'DGZ002', '9787201077642', '2022-06-02 15:46:53', 560, 22400);
 
 -- ----------------------------
 -- Table structure for dgz_user
@@ -78,6 +77,7 @@ CREATE TABLE `dgz_user`  (
 -- ----------------------------
 INSERT INTO `dgz_user` VALUES ('DGZ001', '123456', '张三', '计科', '16359632563');
 INSERT INTO `dgz_user` VALUES ('DGZ002', '123456', '李四', '马原', '13356322356');
+INSERT INTO `dgz_user` VALUES ('DGZ003', '123456', '王五', '计算机', '111');
 
 -- ----------------------------
 -- Table structure for fx_messager
@@ -125,7 +125,7 @@ INSERT INTO `in_table` VALUES (9, '9787521603774', 250);
 INSERT INTO `in_table` VALUES (10, '9787506379786', 350);
 INSERT INTO `in_table` VALUES (11, '9787505745766', 450);
 INSERT INTO `in_table` VALUES (12, '9787500601593', 500);
-INSERT INTO `in_table` VALUES (13, '9787201077642', 550);
+INSERT INTO `in_table` VALUES (13, '9787201077642', 540);
 INSERT INTO `in_table` VALUES (14, '9787100186438', 559);
 
 -- ----------------------------
@@ -148,7 +148,7 @@ CREATE TABLE `js_list`  (
 -- ----------------------------
 -- Records of js_list
 -- ----------------------------
-INSERT INTO `js_list` VALUES ('JS001', '9787521737035', NULL, '2022-06-02 15:22:49', NULL, 5000, 0);
+INSERT INTO `js_list` VALUES ('JS1657016710665', '9787201077642', NULL, NULL, 460, 9200, 0);
 
 -- ----------------------------
 -- Table structure for ls_list
@@ -158,7 +158,7 @@ CREATE TABLE `ls_list`  (
   `ls_id` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '领书单号',
   `dg_id` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '订购单号',
   `ls_date` datetime NULL DEFAULT NULL COMMENT '领书日期',
-  `ls_username` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '经办人',
+  `ls_username` char(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '发行人',
   PRIMARY KEY (`ls_id`) USING BTREE,
   INDEX `DGnumber_ls`(`dg_id`) USING BTREE,
   INDEX `ls_username`(`ls_username`) USING BTREE
@@ -167,9 +167,7 @@ CREATE TABLE `ls_list`  (
 -- ----------------------------
 -- Records of ls_list
 -- ----------------------------
-INSERT INTO `ls_list` VALUES ('LS001', 'DG001', '2022-06-03 15:44:38', 'FX001');
-INSERT INTO `ls_list` VALUES ('LS002', 'DG002', '2022-06-04 15:46:53', 'FX001');
-INSERT INTO `ls_list` VALUES ('LS1656904559757', 'DG001', '2022-07-04 11:16:01', 'FX001');
+INSERT INTO `ls_list` VALUES ('LS1657013578756', 'DG1657013277261', '2022-07-05 17:32:59', 'FX001');
 
 -- ----------------------------
 -- Table structure for qs_list
@@ -188,7 +186,6 @@ CREATE TABLE `qs_list`  (
 -- ----------------------------
 -- Records of qs_list
 -- ----------------------------
-INSERT INTO `qs_list` VALUES ('QS001', '9787521737035', 50, NULL);
 
 -- ----------------------------
 -- Table structure for text_message
