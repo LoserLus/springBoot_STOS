@@ -5,6 +5,7 @@ import com.sdust.stos.common.R;
 import com.sdust.stos.dto.DgListDto;
 import com.sdust.stos.dto.QsListDto;
 import com.sdust.stos.entity.FxMessager;
+import com.sdust.stos.entity.JsList;
 import com.sdust.stos.entity.QsList;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -17,9 +18,9 @@ public interface FxMessagerService extends IService<FxMessager> {
 
     public R<String> release(HttpServletRequest request, @RequestBody DgListDto dgListDto);
 
-    public R<String> sendLockB(HttpServletRequest request,List<QsList> list);
+    public R<String> sendLockB(HttpServletRequest request,List<QsListDto> list);
 
     public R<List<QsListDto>> getLockB();
 
-    public R<String> purchase(List<DgListDto> list);
+    public R<String> purchase(List<QsList> list);
 }

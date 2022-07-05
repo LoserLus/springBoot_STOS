@@ -11,5 +11,8 @@ public class QsListDto extends QsList {
     //书名
     private String bookName;
 
+    //缺的书的订购单号
+    private String dgId;
+
 
 }

@@ -61,8 +61,8 @@ public class FxMessagerController {
      */
     @PostMapping("/sendLockB")
     @ApiOperation(value = "发送缺书单")
-    public R<String> sendLockB(HttpServletRequest request,@RequestBody List<QsList> list){
-        log.info("发放缺书单..");
+    public R<String> sendLockB(HttpServletRequest request,@RequestBody List<QsListDto> list){
+        log.info("发送缺书单..");
 
         return fxMessagerService.sendLockB(request,list);
     }
@@ -85,10 +85,10 @@ public class FxMessagerController {
      * @return
      */
     @PostMapping("/purchase")
-    @ApiOperation(value = "执行采购功能")
-    public R<String> purchase(List<DgListDto> list){
+    @ApiOperation(value = "发行人采购功能")
+    public R<String> purchase(@RequestBody List<QsList> list){
 
-        //把缺的书汇总起来保存到进书表中
+        log.info("给采购人员发送进书单..");
 
         return fxMessagerService.purchase(list);
     }
