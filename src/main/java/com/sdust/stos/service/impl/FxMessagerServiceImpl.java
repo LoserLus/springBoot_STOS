@@ -32,6 +32,9 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
     @Autowired
     private LsListService lsListService;
 
+    @Autowired
+    private QsListService qsListService;
+
 
     @Override
     public R<List<DgListDto>> dglist() {
@@ -124,10 +127,19 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
         //在session中设置当前登录的用户账号
         String nowusername = (String) request.getSession().getAttribute("nowusername");
 
+        for (int i = 0; i < list.size(); i++){
 
+            //从缺书表中获取单个记录，赋值给一个缺书对象
+            QsList qsList = list.get(i);
+            qsList.setQsId("Qs" + System.currentTimeMillis());
+            qsList.setQsUsername(nowusername);
 
+            //把这个缺书记录加到缺书表中
+            qsListService.save(qsList);
 
-        return null;
+        }
+
+        return R.success("发送缺书单成功");
     }
 
     /**
@@ -136,7 +148,33 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
      */
     @Override
     public R<List<QsListDto>> getLockB() {
-        return null;
+
+        List<QsList> qsList = qsListService.list();
+
+        //通过stream流遍历qsList,
+        List<QsListDto> qsListDto = qsList.stream().map((item)->{
+
+            //创建一个qsListDto
+            QsListDto qsListDto1 = new QsListDto();
+
+            //copy qsList到qsListDto
+            BeanUtils.copyProperties(item,qsListDto1);
+
+            //获取这条订购记录的书号
+            String isbn = item.getIsbn();
+
+            TextMessage textMessage = textMessageService.getById(isbn);
+
+            //设置书的名称
+            if(textMessage != null){
+                String bookName = textMessage.getBookName();
+                qsListDto1.setBookName(bookName);
+            }
+            return qsListDto1;
+
+        }).collect(Collectors.toList());
+
+        return R.success(qsListDto);
     }
 
     /**

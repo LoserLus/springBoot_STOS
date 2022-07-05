@@ -65,8 +65,6 @@ public class DgzUserServiceImpl extends ServiceImpl<DgzUserMapper, DgzUser> impl
             //从列表中获取当个书籍
             DgListDto dgListDto = list.get(i);
 
-            //String nowusername = dgListDto.getDgzUsername();
-
             //查询当前书籍的单价是多少
             TextMessage textMessage = textMessageService.getById(dgListDto.getIsbn());
 
