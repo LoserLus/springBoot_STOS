@@ -148,9 +148,9 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
             qsListService.save(qsList);
 
             //把这个订购单删除
-            LambdaQueryWrapper<DgList> queryWrapper = new LambdaQueryWrapper<>();
-            queryWrapper.eq(DgList::getDgId,dgId);
-            dgListService.remove(queryWrapper);
+            //LambdaQueryWrapper<DgList> queryWrapper = new LambdaQueryWrapper<>();
+            //queryWrapper.eq(DgList::getDgId,dgId);
+            //dgListService.remove(queryWrapper);
 
 
         }
