@@ -95,4 +95,12 @@ public class FxMessagerController {
         return fxMessagerService.textOk();
     }
 
+
+    @DeleteMapping
+    @ApiOperation(value = "删除掉进书单",notes = "需要发送的是一个list，其中包括进书单号，返回的是提示信息（成功/失败）")
+    public R<String> delectJsList(@RequestParam List<String> ids){
+
+        return fxMessagerService.delectJsList(ids);
+    }
+
 }

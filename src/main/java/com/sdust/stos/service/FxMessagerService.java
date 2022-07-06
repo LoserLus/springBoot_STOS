@@ -25,4 +25,6 @@ public interface FxMessagerService extends IService<FxMessager> {
     public R<String> purchase(List<QsList> list);
 
     public R<List<JsList>> textOk();
+
+    public R<String> delectJsList(List<String> ids);
 }

@@ -255,4 +255,11 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
         return R.success(list);
     }
 
+
+    public R<String> delectJsList(List<String> ids){
+
+        jsListService.removeByIds(ids);
+
+        return R.success("操作成功");
+    }
 }
