@@ -258,7 +258,12 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
 
     public R<String> delectJsList(List<String> ids){
 
-        jsListService.removeByIds(ids);
+       for(int i=0; i<ids.size(); i++){
+           String s = ids.get(i);
+           LambdaQueryWrapper<JsList> queryWrapper = new LambdaQueryWrapper<>();
+           queryWrapper.eq(JsList::getJsId,s);
+           jsListService.remove(queryWrapper);
+       }
 
         return R.success("操作成功");
     }
