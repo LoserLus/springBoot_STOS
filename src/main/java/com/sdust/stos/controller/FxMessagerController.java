@@ -1,6 +1,5 @@
 package com.sdust.stos.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.sdust.stos.common.R;
 import com.sdust.stos.dto.DgListDto;
 import com.sdust.stos.dto.QsListDto;
@@ -9,16 +8,12 @@ import com.sdust.stos.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
@@ -93,6 +88,11 @@ public class FxMessagerController {
         return fxMessagerService.purchase(list);
     }
 
+    @GetMapping("/testOk")
+    @ApiOperation(value = "订购者查看到书功能",notes = "不需要传参，返回的是到书列表")
+    public R<List<JsList>> textOk(){
 
+        return fxMessagerService.textOk();
+    }
 
 }

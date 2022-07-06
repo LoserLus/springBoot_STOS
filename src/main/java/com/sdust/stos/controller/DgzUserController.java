@@ -4,6 +4,7 @@ package com.sdust.stos.controller;
 import com.sdust.stos.common.R;
 import com.sdust.stos.dto.DgListDto;
 import com.sdust.stos.entity.DgzUser;
+import com.sdust.stos.entity.LsList;
 import com.sdust.stos.entity.TextMessage;
 import com.sdust.stos.service.DgzUserService;
 import io.swagger.annotations.Api;
@@ -66,5 +67,14 @@ public class DgzUserController {
 
        return dgzUserService.textorder(request,list);
     }
+
+
+    @GetMapping("/getText")
+    @ApiOperation(value = "订购者获取领书表",notes = "不需要传参，返回的是领书列表")
+    public R<List<LsList>> getText(){
+
+        return dgzUserService.getText();
+    }
+
 
 }

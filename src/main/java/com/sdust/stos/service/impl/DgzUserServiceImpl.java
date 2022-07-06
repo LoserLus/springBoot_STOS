@@ -7,10 +7,12 @@ import com.sdust.stos.common.R;
 import com.sdust.stos.dto.DgListDto;
 import com.sdust.stos.entity.DgList;
 import com.sdust.stos.entity.DgzUser;
+import com.sdust.stos.entity.LsList;
 import com.sdust.stos.entity.TextMessage;
 import com.sdust.stos.mapper.DgzUserMapper;
 import com.sdust.stos.service.DgListService;
 import com.sdust.stos.service.DgzUserService;
+import com.sdust.stos.service.LsListService;
 import com.sdust.stos.service.TextMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,9 @@ public class DgzUserServiceImpl extends ServiceImpl<DgzUserMapper, DgzUser> impl
 
     @Autowired
     private DgListService dgListService;
+
+    @Autowired
+    private LsListService lsListService;
 
 
     @Override
@@ -110,5 +115,13 @@ public class DgzUserServiceImpl extends ServiceImpl<DgzUserMapper, DgzUser> impl
         }
 
         return R.success("成功订购");
+    }
+
+
+    public R<List<LsList>> getText(){
+
+        List<LsList> list = lsListService.list();
+
+        return R.success(list);
     }
 }

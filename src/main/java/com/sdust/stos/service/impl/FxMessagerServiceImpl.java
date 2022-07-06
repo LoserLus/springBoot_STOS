@@ -248,4 +248,11 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
     }
 
 
+    public R<List<JsList>> textOk(){
+
+        List<JsList> list = jsListService.list();
+
+        return R.success(list);
+    }
+
 }

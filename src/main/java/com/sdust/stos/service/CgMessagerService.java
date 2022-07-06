@@ -14,4 +14,6 @@ public interface CgMessagerService extends IService<CgMessager> {
     public R<List<JsList>> getJsList();
 
     public R<String> purchase(HttpServletRequest request, List<JsListDto> list);
+
+
 }

@@ -23,4 +23,6 @@ public interface FxMessagerService extends IService<FxMessager> {
     public R<List<QsListDto>> getLockB();
 
     public R<String> purchase(List<QsList> list);
+
+    public R<List<JsList>> textOk();
 }

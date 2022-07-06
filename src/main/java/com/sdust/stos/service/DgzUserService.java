@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.sdust.stos.common.R;
 import com.sdust.stos.dto.DgListDto;
 import com.sdust.stos.entity.DgzUser;
+import com.sdust.stos.entity.LsList;
 import com.sdust.stos.entity.TextMessage;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -17,6 +18,8 @@ public interface DgzUserService extends IService<DgzUser> {
     public R<List<TextMessage>> textlist();
 
     public R<String> textorder(HttpServletRequest request, @RequestBody List<DgListDto> list);
+
+    public R<List<LsList>> getText();
 
 
 }
