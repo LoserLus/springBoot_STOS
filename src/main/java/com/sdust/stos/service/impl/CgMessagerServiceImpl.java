@@ -3,6 +3,7 @@ package com.sdust.stos.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sdust.stos.common.R;
+import com.sdust.stos.dto.JsListDto;
 import com.sdust.stos.entity.CgMessager;
 import com.sdust.stos.entity.InTable;
 import com.sdust.stos.entity.JsList;
@@ -38,12 +39,12 @@ public class CgMessagerServiceImpl extends ServiceImpl<CgMessagerMapper, CgMessa
 
     @Override
     @Transactional
-    public R<String> purchase(HttpServletRequest request, List<JsList> list) {
+    public R<String> purchase(HttpServletRequest request, List<JsListDto> list) {
 
 
         for(int i=0;i<list.size();i++){
 
-            JsList jsList = list.get(i);
+            JsListDto jsList = list.get(i);
 
 
             //首先执行采购功能，就是让书库中的库存量增加
@@ -56,7 +57,7 @@ public class CgMessagerServiceImpl extends ServiceImpl<CgMessagerMapper, CgMessa
             //创建一个库存对象，设置属性，然后更新其数据
             InTable inTable = new InTable();
             inTable.setIsbn(jsList.getIsbn());
-            inTable.setStock(jsList.getCgTotal()+stock);
+            inTable.setStock(stock + jsList.getCgNumber());
 
             LambdaQueryWrapper<InTable> queryWrapper1 = new LambdaQueryWrapper<>();
             queryWrapper1.eq(InTable::getIsbn,jsList.getIsbn());

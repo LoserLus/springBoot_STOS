@@ -29,7 +29,7 @@ public class SwaggerConfig {
                 new ApiInfoBuilder()
                         .contact(
                                 new Contact(
-                                        "JK208_SU",
+                                        "JK208_SUDEJIE",
                                         "http://JK208.com",
                                         "JK208@qq.com")
                         )

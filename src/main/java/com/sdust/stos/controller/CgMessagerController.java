@@ -1,6 +1,7 @@
 package com.sdust.stos.controller;
 
 import com.sdust.stos.common.R;
+import com.sdust.stos.dto.JsListDto;
 import com.sdust.stos.entity.JsList;
 import com.sdust.stos.service.CgMessagerService;
 import io.swagger.annotations.Api;
@@ -31,7 +32,7 @@ public class CgMessagerController {
 
     @PostMapping("/purchase")
     @ApiOperation(value = "采购人执行采购功能",notes = "需要发送的是一个list，其中包括进书单号，书号，数量；返回的是注册成功或者失败")
-    public R<String> purchase(HttpServletRequest request,@RequestBody List<JsList> list){
+    public R<String> purchase(HttpServletRequest request,@RequestBody List<JsListDto> list){
         log.info("采购加库存..");
 
         return cgMessagerService.purchase(request,list);
