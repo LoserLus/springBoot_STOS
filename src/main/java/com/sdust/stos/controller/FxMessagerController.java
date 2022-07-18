@@ -8,6 +8,7 @@ import com.sdust.stos.service.FxMessagerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -102,5 +103,27 @@ public class FxMessagerController {
 
         return fxMessagerService.delectJsList(ids);
     }
-
+    @GetMapping("/getBookList")
+    @ApiOperation(value = "获取库存书籍",notes = "无需参数,返回库存书籍list")
+    public R<List<TextMessage>> getBookList(){
+        return fxMessagerService.getBookList();
+    }
+    @PostMapping("/addBook")
+    @ApiOperation(value="增加库存书籍",notes = "新书对象作参数,返回操作结果")
+    public R<String > addBook(@RequestBody TextMessage newBook)
+    {
+        return fxMessagerService.addBook(newBook);
+    }
+    @DeleteMapping("/deleteBook")
+    @ApiOperation(value="根据isbn删除书籍",notes = "ISBN作为参数,返回操作结果")
+    public R<String> deleteBook(String isbn)
+    {
+        return fxMessagerService.deleteBook(isbn);
+    }
+    @PutMapping("/updateBook")
+    @ApiOperation(value="根据对象修改原有书籍,如果原书籍不存在则新增",notes = "新书对象作参数,返回操作结果")
+    public R<String> updateBook(@RequestBody TextMessage newBook)
+    {
+        return fxMessagerService.updateBook(newBook);
+    }
 }

@@ -269,4 +269,31 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
 
         return R.success("操作成功");
     }
+    @Override
+    public R<List<TextMessage>> getBookList()
+    {
+        List<TextMessage> list = textMessageService.list();
+        return R.success(list);
+    }
+
+    @Override
+    public R<String> deleteBook(String isbn) {
+        if(textMessageService.removeById(isbn))
+            return R.success("删除图书成功");
+        return R.error("删除失败");
+    }
+
+    @Override
+    public R<String> addBook(TextMessage newBook) {
+        if(textMessageService.save(newBook))
+            return R.success("增加图书成功");
+        return R.error("增加失败");
+    }
+
+    @Override
+    public R<String> updateBook(TextMessage newBook) {
+        if(textMessageService.saveOrUpdate(newBook))
+            return R.success("更新图书成功");
+        return R.error("更新图书失败");
+    }
 }
