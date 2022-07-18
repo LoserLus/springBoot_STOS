@@ -44,6 +44,7 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
     public R<List<DgListDto>> dglist() {
         LambdaQueryWrapper<DgList> queryWrapper = new LambdaQueryWrapper<>();
 
+        queryWrapper.eq(DgList::getStatus,1);
         queryWrapper.orderByAsc(DgList::getDgDate);
 
         //获取订购列表
@@ -89,7 +90,7 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
     @Transactional
     public R<String> release(HttpServletRequest request, DgListDto dgListDto) {
 
-        //在session中设置当前登录的用户账号
+        //在session中获取当前登录的用户账号
         String nowusername = (String) request.getSession().getAttribute("nowusername");
 
         //根据书号从书库获取这本书的库存信息
@@ -114,17 +115,26 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
         lsList.setLsUsername(nowusername);
         lsListService.save(lsList);
 
-        //把这个订单删除
-        LambdaQueryWrapper<DgList> queryWrapper1 = new LambdaQueryWrapper<>();
-        queryWrapper1.eq(DgList::getDgId, dgListDto.getDgId());
-        dgListService.remove(queryWrapper1);
+        //更改这个订购单的状态,更新到数据表中
+        LambdaQueryWrapper<DgList> queryWrapper2 = new LambdaQueryWrapper<>();
+        queryWrapper2.eq(DgList::getDgId,dgListDto.getDgId());
+        DgList dgListone = dgListService.getOne(queryWrapper2);
 
-        return R.success("发书成功");
+        if(dgListone!=null){
+            dgListone.setStatus(0);
+            LambdaQueryWrapper<DgList> queryWrapper1 = new LambdaQueryWrapper<>();
+            queryWrapper1.eq(DgList::getDgId,dgListone.getDgId());
+            dgListService.update(dgListone,queryWrapper1);
+            return R.success("发书成功");
+        }
+
+        return R.error("内部处理错误");
+
+
     }
 
     /**
      * 发送缺书单到缺书表中
-     *
      * @return
      */
     @Override
@@ -147,12 +157,6 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
             //把这个缺书记录加到缺书表中
             qsListService.save(qsList);
 
-            //把这个订购单删除
-            //LambdaQueryWrapper<DgList> queryWrapper = new LambdaQueryWrapper<>();
-            //queryWrapper.eq(DgList::getDgId,dgId);
-            //dgListService.remove(queryWrapper);
-
-
         }
 
         return R.success("发送缺书单成功");
@@ -160,7 +164,6 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
 
     /**
      * 获取缺书单
-     *
      * @return
      */
     @Override
@@ -196,7 +199,6 @@ public class FxMessagerServiceImpl extends ServiceImpl<FxMessagerMapper, FxMessa
 
     /**
      * 发行人采购功能
-     *
      * @return
      */
     @Override

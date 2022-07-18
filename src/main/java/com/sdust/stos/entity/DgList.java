@@ -31,4 +31,7 @@ public class DgList implements Serializable {
 
     //总额
     private Integer dgAmount;
+
+    //状态 0:已发放，1:未发放
+    private Integer status;
 }

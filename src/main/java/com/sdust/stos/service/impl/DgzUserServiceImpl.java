@@ -92,10 +92,6 @@ public class DgzUserServiceImpl extends ServiceImpl<DgzUserMapper, DgzUser> impl
                 DgOne.setDgTotal(dgAllTotal);
                 DgOne.setDgAmount(price * dgAllTotal);
                 DgOne.setDgDate(LocalDateTime.now());
-                //DgOne.setDgId("DG" + System.currentTimeMillis());
-
-                //先把该条记录删除
-                //dgListService.removeById(DgOne.getDgId());
 
                 //执行更新操作
                 LambdaQueryWrapper<DgList> queryWrapper2 = new LambdaQueryWrapper<>();
@@ -109,6 +105,7 @@ public class DgzUserServiceImpl extends ServiceImpl<DgzUserMapper, DgzUser> impl
                 dgListDto.setDgDate(LocalDateTime.now());
                 dgListDto.setDgId("DG" + System.currentTimeMillis());
                 dgListDto.setDgzUsername(nowusername);
+                dgListDto.setStatus(1);
 
                 dgListService.save(dgListDto);
             }
@@ -129,7 +126,7 @@ public class DgzUserServiceImpl extends ServiceImpl<DgzUserMapper, DgzUser> impl
         //得到当前用户订购的书籍的订单号，可以有多个订单号
         List<DgList> dglist = dgListService.list(queryWrapper);
 
-        ArrayList<LsList> lsLists = null;
+        ArrayList<LsList> lsLists = new ArrayList<>();
 
         for(int i=0;i<dglist.size();i++){
             String dgId = dglist.get(i).getDgId();
@@ -137,7 +134,9 @@ public class DgzUserServiceImpl extends ServiceImpl<DgzUserMapper, DgzUser> impl
             LambdaQueryWrapper<LsList> queryWrapper1 = new LambdaQueryWrapper<>();
             queryWrapper1.eq(LsList::getDgId,dgId);
             LsList one = lsListService.getOne(queryWrapper1);
-            lsLists.add(one);
+            if(one != null){
+                lsLists.add(one);
+            }
         }
 
         return R.success(lsLists);

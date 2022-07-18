@@ -7,10 +7,10 @@ import com.sdust.stos.dto.JsListDto;
 import com.sdust.stos.entity.CgMessager;
 import com.sdust.stos.entity.InTable;
 import com.sdust.stos.entity.JsList;
-import com.sdust.stos.mapper.CgMessagerMapper;
 import com.sdust.stos.service.CgMessagerService;
 import com.sdust.stos.service.InTableService;
 import com.sdust.stos.service.JsListService;
+import com.sdust.stos.mapper.CgMessagerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,7 +74,7 @@ public class CgMessagerServiceImpl extends ServiceImpl<CgMessagerMapper, CgMessa
             //3把进书表中的标识字段改为1，代表已经采购了，库存已经增加了
             jsList.setCgFlag(1);
 
-            //4
+            //4设置采购人采购单的数量
             jsList.setCgTotal(jsList.getCgNumber());
 
 
