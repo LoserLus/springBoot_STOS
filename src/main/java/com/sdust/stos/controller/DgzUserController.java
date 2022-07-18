@@ -71,9 +71,9 @@ public class DgzUserController {
 
     @GetMapping("/getText")
     @ApiOperation(value = "订购者获取领书表",notes = "不需要传参，返回的是领书列表")
-    public R<List<LsList>> getText(){
+    public R<List<LsList>> getText(HttpServletRequest request){
 
-        return dgzUserService.getText();
+        return dgzUserService.getText(request);
     }
 
 

@@ -19,7 +19,7 @@ public interface DgzUserService extends IService<DgzUser> {
 
     public R<String> textorder(HttpServletRequest request, @RequestBody List<DgListDto> list);
 
-    public R<List<LsList>> getText();
+    public R<List<LsList>> getText(HttpServletRequest request);
 
 
 }

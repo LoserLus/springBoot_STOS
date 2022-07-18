@@ -74,7 +74,7 @@ public class CgMessagerServiceImpl extends ServiceImpl<CgMessagerMapper, CgMessa
             //3把进书表中的标识字段改为1，代表已经采购了，库存已经增加了
             jsList.setCgFlag(1);
 
-            //
+            //4
             jsList.setCgTotal(jsList.getCgNumber());
 
 

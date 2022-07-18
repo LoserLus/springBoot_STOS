@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -118,10 +119,27 @@ public class DgzUserServiceImpl extends ServiceImpl<DgzUserMapper, DgzUser> impl
     }
 
 
-    public R<List<LsList>> getText(){
+    public R<List<LsList>> getText(HttpServletRequest request){
 
-        List<LsList> list = lsListService.list();
+        //得到当前登录用户的账号，得到这个用户的订购信息
+        String nowusername = (String) request.getSession().getAttribute("nowusername");
+        LambdaQueryWrapper<DgList> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(DgList::getDgzUsername,nowusername);
 
-        return R.success(list);
+        //得到当前用户订购的书籍的订单号，可以有多个订单号
+        List<DgList> dglist = dgListService.list(queryWrapper);
+
+        ArrayList<LsList> lsLists = null;
+
+        for(int i=0;i<dglist.size();i++){
+            String dgId = dglist.get(i).getDgId();
+            //根据这些订单号得到当前用户的领书单
+            LambdaQueryWrapper<LsList> queryWrapper1 = new LambdaQueryWrapper<>();
+            queryWrapper1.eq(LsList::getDgId,dgId);
+            LsList one = lsListService.getOne(queryWrapper1);
+            lsLists.add(one);
+        }
+
+        return R.success(lsLists);
     }
 }
