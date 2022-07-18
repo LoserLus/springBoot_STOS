@@ -11,7 +11,7 @@
  Target Server Version : 80011
  File Encoding         : 65001
 
- Date: 05/07/2022 19:17:04
+ Date: 18/07/2022 20:37:30
 */
 
 SET NAMES utf8mb4;
@@ -46,6 +46,7 @@ CREATE TABLE `dg_list`  (
   `dg_date` datetime NULL DEFAULT NULL COMMENT '日期',
   `dg_total` int(11) NULL DEFAULT NULL COMMENT '购书总数',
   `dg_amount` int(11) NULL DEFAULT NULL COMMENT '总额',
+  `status` int(11) NULL DEFAULT NULL COMMENT '状态 0:已发放，1:未发放',
   PRIMARY KEY (`dg_id`) USING BTREE,
   INDEX `DSZnumber_user`(`dgz_username`) USING BTREE,
   INDEX `ISBN_dg`(`isbn`) USING BTREE,
@@ -55,6 +56,11 @@ CREATE TABLE `dg_list`  (
 -- ----------------------------
 -- Records of dg_list
 -- ----------------------------
+INSERT INTO `dg_list` VALUES ('DG1658119879250', 'DGZ001', '9787100186438', '2022-07-18 13:29:33', 900, 30600, 0);
+INSERT INTO `dg_list` VALUES ('DG1658119903564', 'DGZ001', '9787201077642', '2022-07-18 12:51:44', 100, 2000, 0);
+INSERT INTO `dg_list` VALUES ('DG1658122769022', 'DGZ001', '9787500601593', '2022-07-18 13:39:29', 50, 1150, 0);
+INSERT INTO `dg_list` VALUES ('DG1658122988582', 'DGZ001', '9787521603774', '2022-07-18 13:43:09', 50, 1150, 0);
+INSERT INTO `dg_list` VALUES ('DG1658124091963', 'DGZ002', '9787100186438', '2022-07-18 14:01:32', 100, 3400, 0);
 
 -- ----------------------------
 -- Table structure for dgz_user
@@ -108,7 +114,7 @@ CREATE TABLE `in_table`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ISBN_intable`(`isbn`) USING BTREE,
   INDEX `number`(`stock`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '库存表二维结构描述库存表的属性，方便进行数据库设计。' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '库存表二维结构描述库存表的属性，方便进行数据库设计。' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of in_table
@@ -121,12 +127,12 @@ INSERT INTO `in_table` VALUES (5, '9787544291170', 600);
 INSERT INTO `in_table` VALUES (6, '9787540487645', 500);
 INSERT INTO `in_table` VALUES (7, '9787530221532', 100);
 INSERT INTO `in_table` VALUES (8, '9787521737035', 150);
-INSERT INTO `in_table` VALUES (9, '9787521603774', 250);
+INSERT INTO `in_table` VALUES (9, '9787521603774', 200);
 INSERT INTO `in_table` VALUES (10, '9787506379786', 350);
 INSERT INTO `in_table` VALUES (11, '9787505745766', 450);
-INSERT INTO `in_table` VALUES (12, '9787500601593', 500);
-INSERT INTO `in_table` VALUES (13, '9787201077642', 540);
-INSERT INTO `in_table` VALUES (14, '9787100186438', 559);
+INSERT INTO `in_table` VALUES (12, '9787500601593', 400);
+INSERT INTO `in_table` VALUES (13, '9787201077642', 820);
+INSERT INTO `in_table` VALUES (14, '9787100186438', 258);
 
 -- ----------------------------
 -- Table structure for js_list
@@ -148,7 +154,7 @@ CREATE TABLE `js_list`  (
 -- ----------------------------
 -- Records of js_list
 -- ----------------------------
-INSERT INTO `js_list` VALUES ('JS1657016710665', '9787201077642', NULL, NULL, 460, 9200, 0);
+INSERT INTO `js_list` VALUES ('JS1658123577903', '9787100186438', 'CG001', '2022-07-18 13:54:56', 999, 21794, 1);
 
 -- ----------------------------
 -- Table structure for ls_list
@@ -167,7 +173,11 @@ CREATE TABLE `ls_list`  (
 -- ----------------------------
 -- Records of ls_list
 -- ----------------------------
-INSERT INTO `ls_list` VALUES ('LS1657013578756', 'DG1657013277261', '2022-07-05 17:32:59', 'FX001');
+INSERT INTO `ls_list` VALUES ('LS1658123079684', 'DG1658122988582', '2022-07-18 13:44:40', 'FX001');
+INSERT INTO `ls_list` VALUES ('LS1658123498782', 'DG1658119903564', '2022-07-18 13:51:39', 'FX001');
+INSERT INTO `ls_list` VALUES ('LS1658123513960', 'DG1658122769022', '2022-07-18 13:51:54', 'FX001');
+INSERT INTO `ls_list` VALUES ('LS1658123737990', 'DG1658119879250', '2022-07-18 13:55:38', 'FX001');
+INSERT INTO `ls_list` VALUES ('LS1658124110800', 'DG1658124091963', '2022-07-18 14:01:51', 'FX001');
 
 -- ----------------------------
 -- Table structure for qs_list
