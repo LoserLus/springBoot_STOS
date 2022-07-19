@@ -85,8 +85,8 @@ public class DgzUserServiceImpl extends ServiceImpl<DgzUserMapper, DgzUser> impl
 
             DgList DgOne = dgListService.getOne(queryWrapper);
 
-            //如果当前用户已经订购过这本书，则修改这条记录的dgTotal值就行
-            if (DgOne != null) {
+            //如果当前用户已经订购过这本书，并且还没有发放，则修改这条记录的dgTotal值就行
+            if (DgOne != null && DgOne.getStatus()==1) {
                 //把之前订购的书籍加上这一次订购的数量
                 int dgAllTotal = DgOne.getDgTotal() + dgListDto.getDgTotal();
                 DgOne.setDgTotal(dgAllTotal);
@@ -98,7 +98,17 @@ public class DgzUserServiceImpl extends ServiceImpl<DgzUserMapper, DgzUser> impl
                 queryWrapper2.eq(DgList::getDgId,DgOne.getDgId());
                 dgListService.update(DgOne,queryWrapper2);
 
-            }else{
+            }
+            //如果当前用户已经订购过这本书，并且还已经发放，再次把这个书籍信息放入订购表中
+            if (DgOne != null && DgOne.getStatus()==0){
+
+                dgListDto.setDgAmount(price * dgListDto.getDgTotal());
+                dgListDto.setDgDate(LocalDateTime.now());
+                dgListDto.setDgId("DG" + System.currentTimeMillis());
+                dgListDto.setDgzUsername(nowusername);
+                dgListDto.setStatus(1);
+
+            } else{
 
                 //如果当前用户没有订购过这本书，把这个书籍信息放入订购表中
                 dgListDto.setDgAmount(price * dgListDto.getDgTotal());
