@@ -108,6 +108,7 @@ public class DgzUserServiceImpl extends ServiceImpl<DgzUserMapper, DgzUser> impl
                 dgListDto.setDgzUsername(nowusername);
                 dgListDto.setStatus(1);
 
+                dgListService.save(dgListDto);
             } else{
 
                 //如果当前用户没有订购过这本书，把这个书籍信息放入订购表中
